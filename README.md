@@ -22,7 +22,7 @@ Instead of blocking the HTTP connection for minutes while scraping completes, th
 ## Quick Start
 
 ```bash
-git clone https://github.com/<your-username>/gmaps-scraper-api.git
+git clone https://github.com/receptopalak/gmaps-scraper-api.git
 cd gmaps-scraper-api
 docker-compose up -d --build
 ```
