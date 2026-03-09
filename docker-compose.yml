@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  gmaps-scraper:
+    image: gosom/google-maps-scraper:latest
+    container_name: google_maps_scraper
+    ports:
+      - "8085:8080"
+    volumes:
+      - ./gmapsdata:/gmapsdata
+    command: ["-data-folder", "/gmapsdata"]
+    restart: unless-stopped
+
+  wrapper:
+    build: .
+    container_name: gmaps_wrapper
+    ports:
+      - "8003:8000"
+    volumes:
+      - ./gmapsdata:/app/gmapsdata
+    environment:
+      - GOSOM_API_URL=http://gmaps-scraper:8080/api/v1
+      - DATA_ROOT=gmapsdata/json
+    depends_on:
+      - gmaps-scraper
+    restart: unless-stopped
